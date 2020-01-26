@@ -102,18 +102,20 @@ export default function Sidebar() {
         <Tab label={<div><DashboardIcon className={classes.icons}/><span>Dashboard</span></div>} {...a11yProps(1)} />
         <Tab label={<div><UploadIcon className={classes.icons}/><span className={classes.icons}> Upload</span></div>} {...a11yProps(2)} />
         <Tab label={<div><VideoIcon className={classes.icons}/><span className={classes.icons}>  Videos</span></div>} {...a11yProps(3)} />
-        <Tab label={<div><StatisticIcon className={classes.icons}/>Statistic</div>} className={classes.bottom} {...a11yProps(3)} />
+        <Tab label={<div><StatisticIcon className={classes.icons}/>Statistic</div>} className={classes.bottom} {...a11yProps(4)} />
       </Tabs>
 
-      <TabPanel value={value} index={0}>
-        Item One  
-      </TabPanel>
+      <TabPanel value={value} index={0}>       </TabPanel>
 
       <TabPanel value={value} index={1} className={classes.panels}>
         <Panel/>
       </TabPanel>
 
       <TabPanel value={value} index={2} className={classes.panels}>
+        <Upload/>
+      </TabPanel>
+
+      <TabPanel value={value} index={0} className={classes.panels}>
         <Upload/>
       </TabPanel>
     </div>

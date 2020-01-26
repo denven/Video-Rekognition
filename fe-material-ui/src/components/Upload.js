@@ -1,11 +1,10 @@
+import React from 'react';
+import moment from 'moment';
+
 import 'react-dropzone-uploader/dist/styles.css'
 import Dropzone from 'react-dropzone-uploader'
-
-import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-
-import moment from 'moment';
 
 export default function MyUploader () {
 
@@ -89,7 +88,7 @@ export default function MyUploader () {
         submitButtonContent={'Upload files for analysis'}
         inputWithFilesContent={'Add Video Files ...'}
         styles={{
-          dropzone: { height: "92vh", border: 'none' },
+          dropzone: { height: "93vh", border: 'none' },
           dropzoneActive: { borderColor: 'green' },
         }}
       />  

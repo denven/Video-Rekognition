@@ -5,13 +5,10 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import './Statistics.css';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: '100%',
-    // height: '140px',
-    // padding: '40px'
+    width: '100%'
   },
   heading: {
     fontSize: '24px',
