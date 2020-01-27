@@ -9,6 +9,7 @@ npm install node-sass --save
 npx -p @storybook/cli sb init
 npm install react-dropzone-uploader
 npm install react-toastify
+npm install material-table --save
 
 
 
