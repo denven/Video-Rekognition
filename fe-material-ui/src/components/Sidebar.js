@@ -12,8 +12,9 @@ import VideoIcon from '@material-ui/icons/VideoLibrary';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import StatisticIcon from '@material-ui/icons/Assessment';
 
-import Panel from './Panel';
+import Dashboard from './Dashboard';
 import Upload from './Upload';
+import Videos from './Videos';
 
 
 function TabPanel(props) {
@@ -89,6 +90,11 @@ export default function Sidebar() {
     setValue(newValue);
   };
 
+  const handleView = function (event, rowData) {
+    console.log('clicked!')
+    return (<h1 style={{left: 0, width: '100%'}}>11111111111</h1>);
+  };
+
   return (
     <div className={classes.root}>
       <Tabs
@@ -108,15 +114,17 @@ export default function Sidebar() {
       <TabPanel value={value} index={0}>       </TabPanel>
 
       <TabPanel value={value} index={1} className={classes.panels}>
-        <Panel/>
+        <Dashboard/>
       </TabPanel>
 
       <TabPanel value={value} index={2} className={classes.panels}>
         <Upload/>
       </TabPanel>
 
-      <TabPanel value={value} index={0} className={classes.panels}>
-        <Upload/>
+      <TabPanel value={value} index={3} className={classes.panels}>
+        <Videos
+          onClick={handleView}
+        />
       </TabPanel>
     </div>
   );

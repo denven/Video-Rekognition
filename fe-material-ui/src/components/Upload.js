@@ -53,14 +53,14 @@ export default function MyUploader () {
 
   }
 
-  const Preview = ({ meta }) => {
-    const { name, videoHeight, videoWidth, duration } = meta;
-    return (
-      <span style={{ alignSelf: 'flex-start'}}>
-        {name}, Dimension: {videoHeight}x{videoWidth}, Duration:{duration}
-      </span>
-    )
-  }
+  // const Preview = ({ meta }) => {
+  //   const { name, videoHeight, videoWidth, duration } = meta;
+  //   return (
+  //     <span style={{ alignSelf: 'flex-start'}}>
+  //       {name}, Dimension: {videoHeight}x{videoWidth}, Duration:{duration}
+  //     </span>
+  //   )
+  // }
 
   //validation for filenames
   const IsInvalidFile = ({ meta }) => {
