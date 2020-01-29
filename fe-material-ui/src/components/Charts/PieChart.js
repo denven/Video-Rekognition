@@ -1,47 +1,47 @@
 import React from 'react';
-import { PieChart, Pie, Sector, Cell, Tooltip } from 'recharts';
+import { PieChart, Pie, Legend, Cell, Tooltip } from 'recharts';
 
-const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
+export default function VideoPieChart(props) {
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+  const data = [];
+  if(props.data) {
+    Object.entries(props.data).forEach(([key, value]) => {
+      if(value > 0){
+        data.push({name: key, value: value});
+      }
+    });    
+  } 
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx, cy, midAngle, innerRadius, outerRadius, percent, index,
-}) => {
-   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  if(!data.length){
+    data.push({name: 'NA', value: 100});  // in case of blank space on page
+  }
+
+  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        {/* {`${(percent * 100).toFixed(0)}%`} */}
+        {data[index].value}
+      </text>
+    );
+  };
 
   return (
-    <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-      {`${(percent * 100).toFixed(0)}%`}
-    </text>
-  );
-};
-
-export default function VideoPieChart() {
-  return (
-    <PieChart width={250} height={250} padding={0, 0, 0, 0}>
-      <Pie
-        data={data}
-        cx={125}
-        cy={125}
-        labelLine={true}
-        label={renderCustomizedLabel}
-        outerRadius={120}
-        fill="#8884d8"
-        dataKey="value"
-      >
-        {
-          data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-        }
-      </Pie>
+    <PieChart width={350} height={250} padding={0, 0, 0, 0}>
+      <Pie 
+        isAnimationActive={false} data={data} 
+        cx={120} cy={120} outerRadius={100} 
+        label={renderCustomizedLabel} labelLine={false}>
+        { data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />) } 
+      </Pie>       
+      <Tooltip />
+      <Legend layout={'vertical'} align={'left'} verticalAlign={'top'} height={10}/>
     </PieChart>
   );
 }
