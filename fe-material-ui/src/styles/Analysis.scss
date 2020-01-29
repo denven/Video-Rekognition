@@ -1,9 +1,18 @@
-.dataContainer {
+/*  Layout
+ **********************************
+  VideoPlayer       |  2 pie Chart2 
+ **********************************
+  3 tiles in column |  line Chart
+ **********************************
+*/
+.outerContainer {
   display: flex;
-  opacity: 0;
+  margin: 0%;
   flex-direction: column;
-  height: 98vh;
-  width: 82vw;
+  left: 0%;
+  right: 0%;
+  height: 100%;
+  width: 100%;
 }
 
 .upperRow {
@@ -14,12 +23,39 @@
   order: 0;
 }
 
+/* left part of up row, contains one videoplayer */
+.videoPlayerBox {
+  margin: 5px 5px 5px 5px;
+  height: 100%;
+  width: 33%;
+}
+
+/* right part of up row: contains two pie charts */
+.pieChartsBox {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  vertical-align: middle;
+  width: 66%;
+  height: 100%;
+}
+
+.pieChart {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 50%;
+  // padding: 30px 0px 0px 0px;
+}
+
+////////////////////////////////////////////////////////////
 .bottomRow{
   display: flex;
   height: 64%;
   width: 100%;
 }
 
+/* contains three tiles of data */
 .bottomLeft {
   display: flex;
   flex-direction: column;
@@ -29,10 +65,17 @@
   text-align: justify;
 }
 
-.pie {
-  height: 100%;
-  width: 50%;
-  padding: 30px 0px 0px 0px;
+.tileBox {
+  text-align: center;
+  width: 100%;
+  height: 33%;
+  padding: 5px 0px 0px 0px;
+  margin: 5px;
+  border: solid 2px lightgray;
+  border-radius: 5px;
+  margin: 25px 10px;
+  vertical-align: center;
+  background-color: #F3FAF1;
 }
 
 .bottomRight {  
@@ -41,16 +84,10 @@
   padding: 25px 0px 0px 25px;
 }
 
-.bar {
+.barChart {
   width: 50%;
   height: 66%;
   order: 1;
-}
-
-.videoContainer {
-  margin: 5px 5px 5px 5px;
-  height: 100%;
-  width: 33%;
 }
 
 .video {
@@ -66,26 +103,6 @@
 
 .sidebar {
   width: 50px;
-}
-
-.singleData {
-  display: flex;
-  flex-direction: row;
-  width: 66%;
-  height: 100%;
-}
-
-.singles {
-  text-align: center;
-  width: 100%;
-  height: 33%;
-  padding: 5px 0px 0px 0px;
-  margin: 5px;
-  border: solid 2px lightgray;
-  border-radius: 5px;
-  margin: 25px 10px;
-  vertical-align: center;
-  background-color: #F3FAF1;
 }
 
 .MuiFormGroup-root {
