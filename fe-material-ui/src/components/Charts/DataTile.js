@@ -1,11 +1,12 @@
 
 import React from 'react';
+import '../../styles/Analysis.scss'
 
 export default function DataTile (props) {
   return (
     <div>
-      <p>Number</p> 
-      <h4><b>Recurs</b></h4> 
+      <p>{props.number}</p> 
+      <p className='textSize'>{props.title}</p> 
     </div>
   );
 }
