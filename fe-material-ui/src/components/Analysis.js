@@ -17,7 +17,7 @@ export default function Analysis (props) {
   const [avgRecur, setRecurs] = useState('');
   const [recursVsTotal, setRecurRatio] = useState('');
   const [avgDuration, setDuration] = useState('');
-  
+  const [traffic, setTraffic] = useState([]);  
 
   const getAgesGroup = (data) => {
     return {
@@ -67,8 +67,8 @@ export default function Analysis (props) {
   }
 
   const getAvgStayDuration = (data) => {
-    let total_seconds = 0;
 
+    let total_seconds = 0;
     for(const item of data) {
       if(item.stay_duration) {
         total_seconds += item.stay_duration;
@@ -76,6 +76,28 @@ export default function Analysis (props) {
     }
 
     return data.length > 0 ? Math.ceil(total_seconds/data.length) : 0;    
+  }
+
+  const getTrafficData = (data) => {
+
+    const timeFormat = (ts) => { 
+
+      let hour = Math.floor(ts / (60*60*1000));
+      let min = Math.floor((ts % (60*60*1000))/(60*1000));
+      let sec = Math.floor((ts % (60*1000)) / 1000);
+
+      if(hour > 0) {
+        return hour + ':'+ min + ':' + sec + 's'; 
+      } else if(min > 0) {
+        return min + `'` + sec + `"`;  
+      } else {
+        return sec + `"`;
+      }
+    }
+
+    return data.map(item => {
+      return {time: timeFormat(item.timestamp), count: item.count};
+    });
   }
 
   useEffect(() => {
@@ -92,6 +114,7 @@ export default function Analysis (props) {
       setRecurs(getAvgRecurDays(data[1].data));
       setRecurRatio(getRecursVsTotal(data[1].data));
       setDuration(getAvgStayDuration(data[2].data.persons));
+      setTraffic(getTrafficData(data[2].data.traffic));
 
     }).catch(err => console.log(err));
   },[]); 
@@ -137,7 +160,7 @@ export default function Analysis (props) {
           </div>
         </div>
         <div className='bottomRight'>
-          <LineChart/>
+          <LineChart data={traffic}/>
         </div>
       </div>
     
