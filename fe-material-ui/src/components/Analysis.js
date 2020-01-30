@@ -20,7 +20,8 @@ export default function Analysis (props) {
   const [recursVsTotal, setRecurRatio] = useState('');
   const [avgDuration, setDuration] = useState('');
   const [traffic, setTraffic] = useState([]);  
-  const [pieView, setView] = useState('sex');
+  const [sexView, setPieView] = useState(true);
+  const [lineView, setTrafficView] = useState(true);
 
   const getAgesGroup = (data) => {
     return {
@@ -120,8 +121,6 @@ export default function Analysis (props) {
     }).catch(err => console.log(err));
   },[]); 
 
-  console.log('1111111111', pieView, emotions);
-
   return(
     <div className="outerContainer">
 
@@ -134,10 +133,10 @@ export default function Analysis (props) {
             <PieChart data={ageData}/>
           </div>
           <div className='pieChart'>
-            <PieChart data={(pieView === 'sex') ? sexData : emotions}/>
+            <PieChart data={sexView ? sexData : emotions}/>
           </div>
-          <div className='pieToggle'>
-            <Switch setView={setView}/>
+          <div className='chartToggle'>
+            <Switch type={'dataType'} toggleView={setPieView}/>
           </div>
         </div>
       </div>
@@ -164,7 +163,12 @@ export default function Analysis (props) {
           </div>
         </div>
         <div className='bottomRight'>
-          <LineChart data={traffic}/>
+          <div>
+            {lineView ? <LineChart data={traffic}/> : <BarChart data={traffic}/>}
+          </div>
+          <div className='chartToggle'>
+            <Switch type={'chartView'} toggleView={setTrafficView}/>
+          </div>
         </div>
       </div>
     
