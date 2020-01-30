@@ -3,13 +3,13 @@ import { useState, useEffect } from 'react';
 import Switch from '@material-ui/core/Switch';
 
 export default function SwitchesGroup(props) {
-  const [state, setState] = useState({ emotions: false });
+  const [state, setState] = useState({ switched: false });  // not enabled by default
 
   useEffect(() => {
-    if (state.emotions === true) {
-      props.setView("emotions");
+    if (state.switched === true) {
+      props.toggleView(false);
     } else {
-      props.setView("sex");
+      props.toggleView(true);
     }
   }, [state])
 
@@ -19,8 +19,8 @@ export default function SwitchesGroup(props) {
 
   return (
     <>
-      <span>emotion</span>
-      <Switch size='small' checked={state.emotions} onChange={handleChange('emotions')}/>
+      <span>{props.type === 'dataType' ? 'emotion' : 'BarChart'}</span>
+      <Switch size='small' checked={state.switched} onChange={handleChange('switched')}/>
     </  >
   );
 }
