@@ -1,45 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import Analysis from './Analysis';
+import axios from 'axios';
  
 export default function Videos (props) {
 
-  const [mode, setMode] = useState('TABLE');
+  const [view, setView] = useState('TABLE');
+  const [videos, setVideos] = useState([]);
+  const [selVideo, setVideo] = useState({});
 
-  switch(mode) {
-    case 'TABLE': 
+  useEffect(() => {
+    axios.get(`/videos`).then(data => { setVideos(data.data); })
+    .catch(err => console.log(err));
+  },[]);
+
+  switch(view) {
+    case 'TABLE':   // show videos list table
       return (    
         <div style={{ maxWidth: "100%" }}>
           <MaterialTable
-            title="Videos"
+            title="Videos Uploaded"
             columns={[
               { title: "File Name", field: "name" },
               { title: "Duration", field: "duration" },
               { title: "Analysis Status", field: "status" },
             ]}
 
-            //rows
-            data={[
-              { name: "VID_20191240_120253", duration: "20", status: 'done' }
-            ]}
+            data={
+              videos.map(item => {
+                return { name: item.name, duration: item.duration, status: item.ana_status }
+              })
+            }
 
             actions={[
               {
                 icon: 'pageview',
                 tooltip: 'View analysis result',
-                onClick: (event, rowData) => {setMode('GRAPH')}
+                onClick: (event, rowData) => {
+                  setView('GRAPH');
+                  setVideo( videos.filter(item => item.name === rowData.name)[0] );
+                }
               }
             ]}
 
             options = {
-              { actionsColumnIndex: 3 }
+              { search: true, pageSize: 10, actionsColumnIndex: 3 }
             }
           />
         </div>
       );
-    case 'GRAPH':
+    case 'GRAPH':  // show sigle video's analysis data
       return (
-        <Analysis/>
+        <Analysis video={selVideo}/>
       );
     default:
       return;

@@ -19,6 +19,8 @@ export default function Analysis (props) {
   const [avgDuration, setDuration] = useState('');
   const [traffic, setTraffic] = useState([]);  
 
+  console.log('testtttttttttttttt', props.video);
+
   const getAgesGroup = (data) => {
     return {
       'Pre-Teen': _.filter(data, {age: 0}).length,
