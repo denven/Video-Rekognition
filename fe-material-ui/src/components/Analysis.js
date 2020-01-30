@@ -163,7 +163,7 @@ export default function Analysis (props) {
           </div>
         </div>
         <div className='bottomRight'>
-          <div>
+          <div className='trafficChart'>
             {lineView ? <LineChart data={traffic}/> : <BarChart data={traffic}/>}
           </div>
           <div className='chartToggle'>

@@ -33,14 +33,14 @@ export default function VideoPieChart(props) {
   };
 
   return (
-    <PieChart width={350} height={250} padding={0, 0, 0, 0}>
+    <PieChart width={350} height={250}>
       <Pie 
-        isAnimationActive={false} data={data} 
+        isAnimationActive={false} data={data} // if animation is activated, data cannot be shown
         cx={120} cy={120} outerRadius={100} 
         label={renderCustomizedLabel} labelLine={false}>
         { data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />) } 
       </Pie>       
-      <Tooltip />
+      <Tooltip/>
       <Legend layout={'vertical'} align={'left'} verticalAlign={'top'} height={10}/>
     </PieChart>
   );

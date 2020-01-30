@@ -6,12 +6,13 @@ export default function VideoLineChart(props) {
   const data = props.data;
 
   return (
-    <LineChart width={800} height={400} data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+    <LineChart width={800} height={400} data={data} margin={{ top: 5, right: 30, left: 0, bottom: 5 }}>
       <Line type="monotone" dataKey="count" stroke="#8884d8" />
       <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey="time" />
-      <YAxis />
-      <Tooltip />
+      <XAxis dataKey="time"/>
+      <YAxis/>
+      {/* <Legend/> */}
+      <Tooltip/>
     </LineChart>
   );
 }
