@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
-    height: '100vh',
+    height: '97.5vh',
   },
   tabs: {
     borderRight: `2px solid ${theme.palette.divider}`,
@@ -68,17 +68,15 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     left: '50%',
     transform: 'translateX(-50%)',
-    bottom: 10,
-    // fontSize: 20
+    bottom: 0
   },
   panels: {
     position: 'absolute',
     top: 0,
     right: 0,
     height: '100vh',
-    width: '88vw'
+    width: '87vw'
   }
-
 }));
 
 export default function Sidebar() {

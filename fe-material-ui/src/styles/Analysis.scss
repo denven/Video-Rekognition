@@ -26,7 +26,7 @@
 /* left part of up row, contains one videoplayer */
 .videoPlayerBox {
   margin: 5px 5px 5px 5px;
-  height: 100%;
+  height: '100%';  /* need single quotation, don't know the reason */
   width: 33%;
 }
 
@@ -51,7 +51,7 @@
 ////////////////////////////////////////////////////////////
 .bottomRow{
   display: flex;
-  height: 64%;
+  height: 66%;
   width: 100%;
 }
 
@@ -66,16 +66,17 @@
 }
 
 .tileBox {
+  display: flex;
   text-align: center;
+  justify-content: center;
   width: 100%;
-  height: 33%;
+  height: '20vh';
   padding: 5px 0px 0px 0px;
-  margin: 5px;
   border: solid 2px lightgray;
   border-radius: 5px;
-  margin: 25px 10px;
+  margin: 30px 0 0 5px;
   vertical-align: center;
-  background-color: #F3FAF1;
+  background-color: rgb(217, 238, 211);
 }
 
 .bottomRight {  
@@ -120,6 +121,7 @@
 .dashpanel {
   position: relative;
 }
+
 .MuiExpansionPanelSummary-root {
   display: flex;
     padding: 0 24px 0 24px;

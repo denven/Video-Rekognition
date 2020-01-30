@@ -47,5 +47,7 @@
     "@storybook/addons": "^5.3.8",
     "@storybook/preset-create-react-app": "^1.5.2",
     "@storybook/react": "^5.3.8"
-  }
+  },
+  "proxy": "http://localhost:8080",
+  "secure": false
 }
