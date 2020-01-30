@@ -14,6 +14,15 @@ export default function Videos (props) {
     .catch(err => console.log(err));
   },[]);
 
+  const getAnalysisStatus = (status) => {
+    switch (status) {
+      case 0:  return 'Pended';        
+      case -1: return 'Failed';        
+      case 4:  return 'Success';        
+      default: return 'In Process';
+    }
+  }
+
   switch(view) {
     case 'TABLE':   // show videos list table
       return (    
@@ -26,9 +35,9 @@ export default function Videos (props) {
               { title: "Analysis Status", field: "status" },
             ]}
 
-            data={
+            data = {
               videos.map(item => {
-                return { name: item.name, duration: item.duration, status: item.ana_status }
+                return { name: item.name, duration: item.duration, status: getAnalysisStatus(item.ana_status) }
               })
             }
 
