@@ -5,6 +5,7 @@ import LineChart from './Charts/LineChart';
 import PieChart from './Charts/PieChart';
 import BarChart from './Charts/BarChart';
 import DataTile from './Charts/DataTile';
+import Switch from './Charts/Switch';
 
 import axios from 'axios';
 import _ from 'lodash';
@@ -13,13 +14,13 @@ export default function Analysis (props) {
 
   // const [anaResults, setResults] = useState({});
   const [sexData, setSexData] = useState({});
+  const [emotions, setEmotions] = useState({});
   const [ageData, setAgeData] = useState({});
   const [avgRecur, setRecurs] = useState('');
   const [recursVsTotal, setRecurRatio] = useState('');
   const [avgDuration, setDuration] = useState('');
   const [traffic, setTraffic] = useState([]);  
-
-  console.log('testtttttttttttttt', props.video);
+  const [pieView, setView] = useState('sex');
 
   const getAgesGroup = (data) => {
     return {
@@ -38,15 +39,15 @@ export default function Analysis (props) {
 
   const getEmotionData = (data) => {
     return {
-      'HAPPY': _.filter(data, {HAPPY: 0}).length,
-      'SAD': _.filter(data, {SAD: 1}).length,
-      'ANGRY': _.filter(data, {ANGRY: 2}).length,
-      'CONFUSED': _.filter(data, {CONFUSED: 3}).length,
-      'DISGUSTED': _.filter(data, {DISGUSTED: 4}).length,
-      'SURPRISED': _.filter(data, {SURPRISED: 1}).length,
-      'CALM': _.filter(data, {CALM: 2}).length,
-      'FEAR': _.filter(data, {FEAR: 3}).length,
-      'UNKNOWN': _.filter(data, {UNKNOWN: 4}).length,
+      'HAPPY': _.filter(data, {emotion: 'HAPPY'}).length,
+      'SAD': _.filter(data, {emotion: 'SAD'}).length,
+      'ANGRY': _.filter(data, {emotion: 'ANGRY'}).length,
+      'CONFUSED': _.filter(data, {emotion: 'CONFUSED'}).length,
+      'DISGUSTED': _.filter(data, {emotion: 'DISGUSTED'}).length,
+      'SURPRISED': _.filter(data, {emotion: 'SURPRISED'}).length,
+      'CALM': _.filter(data, {emotion: 'CALM'}).length,
+      'FEAR': _.filter(data, {emotion: 'FEAR'}).length,
+      'UNKNOWN': _.filter(data, {emotion: 'UNKNOWN'}).length
     };  
   }
 
@@ -108,20 +109,18 @@ export default function Analysis (props) {
     let pTracks = axios.get(`/track/${props.video.id}`);
 
     Promise.all([pFaces, pRecurs, pTracks]).then(data => {
-      console.log('xxxxxxxxxxxxxxxxxxxxx', data[2].data.traffic);
       // setResults({faces: data[0].data, recurs: data[1].data, persons: data[2].data.persons, traffic: data[2].data.traffic});
-
-      setSexData(getGenderData(data[0].data));
       setAgeData(getAgesGroup(data[0].data));
+      setSexData(getGenderData(data[0].data));
+      setEmotions(getEmotionData(data[0].data));
       setRecurs(getAvgRecurDays(data[1].data));
       setRecurRatio(getRecursVsTotal(data[1].data));
       setDuration(getAvgStayDuration(data[2].data.persons));
       setTraffic(getTrafficData(data[2].data.traffic));
-
     }).catch(err => console.log(err));
   },[]); 
 
-  // console.log('1111111111', anaResults);
+  console.log('1111111111', pieView, emotions);
 
   return(
     <div className="outerContainer">
@@ -135,7 +134,10 @@ export default function Analysis (props) {
             <PieChart data={ageData}/>
           </div>
           <div className='pieChart'>
-            <PieChart data={sexData}/>
+            <PieChart data={(pieView === 'sex') ? sexData : emotions}/>
+          </div>
+          <div className='pieToggle'>
+            <Switch setView={setView}/>
           </div>
         </div>
       </div>
