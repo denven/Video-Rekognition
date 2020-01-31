@@ -35,11 +35,10 @@ export default function SimpleExpansionPanel() {
     <div className={classes.root}>
       <ExpansionPanel defaultExpanded={true}>        
         <ExpansionPanelSummary
-          classes={{ 'root.Mui-expanded': classes['newroot.Mui-expanded']}}
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
           <Typography className={classes.heading}>About</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.column}>
