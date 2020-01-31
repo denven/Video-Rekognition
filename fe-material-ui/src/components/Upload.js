@@ -18,14 +18,14 @@ export default function MyUploader () {
   
   // called every time a file's `status` changes
   const handleChangeStatus = ({ meta, file }, status) => { 
-    // console.log(`status mema file`, status, meta, file) 
-    // if (status === 'headers_received') {
-    //   toast.info(`${meta.name} uploaded!`, { position: toast.POSITION.BOTTOM_RIGHT });
-    // } else if (status === 'aborted') {
-    //   toast.warn(`${meta.name}, upload failed...`);
-    // }  
+    console.log(`status mema file`, status, meta, file) 
+    if (status === 'headers_received') {
+      toast.info(`${meta.name} uploaded!`, { position: toast.POSITION.BOTTOM_RIGHT });
+    } else if (status === 'aborted') {
+      toast.warn(`${meta.name}, upload failed...`);
+    }  
     if(status === 'error_validation') {
-      // toast.error(xxxx, { position: toast.POSITION.BOTTOM_RIGHT });
+      toast.error('Wrong filename format!', { position: toast.POSITION.BOTTOM_RIGHT });
     }
   }
   
@@ -42,9 +42,9 @@ export default function MyUploader () {
 
     for( const file of files) {
       if (file.meta.status === 'done') { 
-        await delay(Math.ceil(file.meta.size/(20*1024*1024)));
-        toast.info(`${file.meta.name} uploaded!`, { position: toast.POSITION.BOTTOM_RIGHT });
-        await delay(2);
+        // await delay(Math.ceil(file.meta.size/(20*1024*1024)));
+        // toast.info(`${file.meta.name} uploaded!`, { position: toast.POSITION.BOTTOM_RIGHT });
+        // await delay(2);
         file.remove();  
       } else if (file.status === 'aborted') {
         toast.warn(`${file.meta.name}, upload failed...`);
@@ -62,14 +62,14 @@ export default function MyUploader () {
   //   )
   // }
 
-  //validation for filenames
+  //validation for filename
   const IsInvalidFile = ({ meta }) => {
 
     let dateTime = meta.name.slice(0, -3).replace(/[^0-9]/ig,"").slice(0,14);
-    if(moment(dateTime).isValid()) {
+    if(moment(dateTime, 'YYYYMMDDHHmmss').isValid()) {
       return false;
     } else {
-      return `Invalid filename format, suggested filename example: VID_20200120_123548.mp4`;
+      return `Invalid filename, suggested filename example: VID_20200120_123548.mp4`;
     }
   }
  
@@ -85,7 +85,7 @@ export default function MyUploader () {
         validate={IsInvalidFile}
         autoUpload={true}
         maxFiles={3}
-        submitButtonContent={'Upload files for analysis'}
+        submitButtonContent={'Clear'}
         inputWithFilesContent={'Add Video Files ...'}
         styles={{
           dropzone: { height: "93vh", border: 'none' },

@@ -126,7 +126,7 @@ export default function Analysis (props) {
 
       <div className="upperRow">
         <div className="videoPlayerBox">
-          <ReactPlayer url='https://www.youtube.com/watch?v=9Ka1fcn74Hg' width='100%' height='100%' controls muted />
+          <ReactPlayer url={props.video.s3_url} width='100%' height='100%' controls muted />
         </div>
         <div className='pieChartsBox'>          
           <div className='pieChart'>
