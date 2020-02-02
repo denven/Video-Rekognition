@@ -11,14 +11,14 @@ export default function MyUploader () {
   // specify upload params and url for your files
   const getUploadParams = ({ file, meta }) => { 
     const body = new FormData();
-    console.log(`This is file and meta from getUPloadParams`, file, meta);
+    // console.log(`This is file and meta from getUPloadParams`, file, meta);
     body.append('VID', file);  //this is one validation
     return { url: '/upload', body };
   }
   
   // called every time a file's `status` changes
   const handleChangeStatus = ({ meta, file }, status) => { 
-    console.log(`status mema file`, status, meta, file) 
+    // console.log(`status mema file`, status, meta, file) 
     if (status === 'headers_received') {
       toast.info(`${meta.name} uploaded!`, { position: toast.POSITION.BOTTOM_RIGHT });
     } else if (status === 'aborted') {
