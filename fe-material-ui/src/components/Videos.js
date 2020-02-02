@@ -6,14 +6,44 @@ import axios from 'axios';
  
 export default function Videos (props) {
 
-  const [view, setView] = useState('TABLE');
+  const [view, setView] = useState('TABLE');  
   const [videos, setVideos] = useState([]);
   const [selVideo, setVideo] = useState({});
 
-  useEffect(() => {
+  const [listening, setListening ] = useState(false);
+
+  useEffect( () => {
     axios.get(`/videos`).then(data => { setVideos(data.data); })
     .catch(err => console.log(err));
-  },[]);
+  }, []);
+
+  //for processing server-sent event
+  useEffect( () => {
+
+    // axios.get(`/videos`).then(data => setVideos(data.data))
+    // .catch(err => console.log(err));
+
+    if (!listening) {
+      const sse = new EventSource('/events');
+
+      sse.onmessage = (e) => {
+        const needUpdate = JSON.parse(e.data);
+        // console.log('Test analysis status:', needUpdate);
+        if(needUpdate) {
+          axios.get(`/videos`).then(data => setVideos(data.data))
+          .catch(err => console.log(err));
+        }
+      };
+
+      sse.onopen = e => console.log('event is opened', e); 
+      sse.onerror = e => console.log('event has errors', e);
+
+      sse.addEventListener("data", e => console.log(e.data));
+      setListening(true);
+
+      return () => sse.close();  // cleanup when unmount the component in case of memory leak
+    }
+  }, [listening]);
 
   const getAnalysisStatus = (status) => {
     switch (status) {
