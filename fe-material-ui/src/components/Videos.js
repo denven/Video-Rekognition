@@ -6,14 +6,44 @@ import axios from 'axios';
  
 export default function Videos (props) {
 
-  const [view, setView] = useState('TABLE');
+  const [view, setView] = useState('TABLE');  
   const [videos, setVideos] = useState([]);
   const [selVideo, setVideo] = useState({});
 
-  useEffect(() => {
-    axios.get(`/videos`).then(data => { setVideos(data.data); })
+  const [listening, setListening ] = useState(false);
+
+  //for processing server-sent event
+  // useEffect( () => {
+  //   axios.get(`/videos`).then(data => { setVideos(data.data); })
+  //   .catch(err => console.log(err));
+  // }, []);
+
+  useEffect( () => {
+
+    axios.get(`/videos`).then(data => setVideos(data.data))
     .catch(err => console.log(err));
-  },[]);
+
+    if (!listening) {
+      // subscribe for server messages, this only works when the full path put in
+      // other than the endpoint short path
+      const sse = new EventSource('/events');
+
+      sse.onmessage = (e) => {
+        const needUpdate = JSON.parse(e.data);
+        // console.log('Test analysis status:', needUpdate);
+        if(needUpdate) {
+          axios.get(`/videos`).then(data => setVideos(data.data))
+          .catch(err => console.log(err));
+        }
+      };
+
+      sse.onopen = (e) => { console.log('event is opened', e); }
+      sse.onerror = (e) => { console.log('event has errors', e); }
+
+      sse.addEventListener("data", (e) => { console.log(e.data) });
+      setListening(true);
+    }
+  }, []);
 
   const getAnalysisStatus = (status) => {
     switch (status) {
