@@ -66,15 +66,14 @@ module.exports = function() {
     });
      
     // compose the message
+    let anaStatus = [];
     const interval = setInterval(() => {
-      knex('videos').select('name').where('ana_status', '<', 4).then( videos => {
-        if(true || videos.length > 0) {
-          // res.write(`status: ${JSON.stringify(videos)}`);
-          res.write(`event: message\n`);
-          res.write(`data: {"data": "${new Date()}"}\n\n`);  //test
-          res.flushHeaders();
-          // res.write('\n\n'); // whenever sending two '\n', the msg is sent automatically
-        }
+      //check pended or in-process videos
+      knex('videos').select('name').whereIn('ana_status', [0,1,2,3]).then( videos => {   
+        let curAnaStatus = [];     
+        videos.forEach(video => curAnaStatus.push(video.ana_status));
+        res.write(`data: ${!(_.isEqual(anaStatus, curAnaStatus))}\n\n`);  
+        anaStatus = _.cloneDeep(curAnaStatus);
       })
     }, 3000);
 
@@ -87,7 +86,7 @@ module.exports = function() {
 
   // get days having videos (filmed) uploaded, query videos table and get all the video_ids
   router.get('/videos', (req, res) => {
-
+    console.log(`videos get`);
     knex('videos')
         .select('*')
         .orderBy('id', 'desc')
