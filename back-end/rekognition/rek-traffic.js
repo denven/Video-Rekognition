@@ -122,9 +122,6 @@ async function startTrackingAnalysis (videoKey) {
     let job = await startPersonTracking(videoKey);
     let task = { JobName: 'PersonTrack', JobId: job.JobId };  
 
-    //although the job iss not done yet, we put it here to update the client status into the
-    //IN-PROCESS status more instantly, and it's not accurate(I don't want to change more code)
-    db.updateVideoAnaStatus(videoKey, 1); 
     Chalk(HINT(`Starts Job: Person Tracking, JobId: ${task.JobId}`));   
 
     let status = await queryJobStatusFromSQS(APP_REK_SQS_NAME, task);

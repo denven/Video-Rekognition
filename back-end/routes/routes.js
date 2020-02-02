@@ -86,7 +86,6 @@ module.exports = function() {
 
   // get days having videos (filmed) uploaded, query videos table and get all the video_ids
   router.get('/videos', (req, res) => {
-    console.log(`videos get`);
     knex('videos')
         .select('*')
         .orderBy('id', 'desc')

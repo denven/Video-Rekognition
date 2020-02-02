@@ -129,6 +129,9 @@ async function startVideoRekognition (videoKey) {
   await deleteSQSHisMessages(APP_REK_SQS_NAME);
 
   // This task takes too much time, let's start it at first
+  // Although the job iss not done yet, we put it here to update the client status into the
+  // IN-PROCESS status more instantly, and it's not accurate(I don't want to change more code)
+  db.updateVideoAnaStatus(videoKey, 1); 
   startTrackingAnalysis(videoKey);
 
   // Step 1: Pre-Analyze the video(video/images process, file uploading, face detection) 
