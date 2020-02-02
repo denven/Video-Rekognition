@@ -253,7 +253,7 @@ async function getPersonDetailsFromVideo (videoKey, collectionId, detailedFaces)
 async function getPersonRecuringAmongVideos (videoKey, collectionId) {
 
   if(await isCollectionEmpty(collectionId)) {
-    Chalk(HINT(`No Recuring analysis needed as ${videoKey} is the first video`));   
+    Chalk(HINT(`Recuring analysis is not needed as ${videoKey} is the first video`));   
     db.updateVideoAnaStatus(videoKey, 1);
     return;
   }

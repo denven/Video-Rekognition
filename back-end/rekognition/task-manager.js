@@ -6,7 +6,7 @@ const ERROR = chalk.bold.red;
 const HINT = chalk.keyword('orange');
 const Chalk = console.log
 
-const ANA_DONE = 4
+const ANA_DONE = 4;  //0: new added(pended), 4, done, 1-2-3-4: in process, -1: failed
 
 async function chkUnAnaVideos () {
 
