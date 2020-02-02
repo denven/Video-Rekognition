@@ -12,6 +12,7 @@ export default function Videos (props) {
 
   const [listening, setListening ] = useState(false);
 
+<<<<<<< HEAD
   useEffect( () => {
     axios.get(`/videos`).then(data => { setVideos(data.data); })
     .catch(err => console.log(err));
@@ -24,6 +25,22 @@ export default function Videos (props) {
     // .catch(err => console.log(err));
 
     if (!listening) {
+=======
+  //for processing server-sent event
+  // useEffect( () => {
+  //   axios.get(`/videos`).then(data => { setVideos(data.data); })
+  //   .catch(err => console.log(err));
+  // }, []);
+
+  useEffect( () => {
+
+    axios.get(`/videos`).then(data => setVideos(data.data))
+    .catch(err => console.log(err));
+
+    if (!listening) {
+      // subscribe for server messages, this only works when the full path put in
+      // other than the endpoint short path
+>>>>>>> c7c86e92b20e44af74e64cf378e16da6256e3f66
       const sse = new EventSource('/events');
 
       sse.onmessage = (e) => {
@@ -35,6 +52,7 @@ export default function Videos (props) {
         }
       };
 
+<<<<<<< HEAD
       sse.onopen = e => console.log('event is opened', e); 
       sse.onerror = e => console.log('event has errors', e);
 
@@ -44,6 +62,15 @@ export default function Videos (props) {
       return () => sse.close();  // cleanup when unmount the component in case of memory leak
     }
   }, [listening]);
+=======
+      sse.onopen = (e) => { console.log('event is opened', e); }
+      sse.onerror = (e) => { console.log('event has errors', e); }
+
+      sse.addEventListener("data", (e) => { console.log(e.data) });
+      setListening(true);
+    }
+  }, []);
+>>>>>>> c7c86e92b20e44af74e64cf378e16da6256e3f66
 
   const getAnalysisStatus = (status) => {
     switch (status) {
