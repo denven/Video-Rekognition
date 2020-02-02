@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MaterialTable from "material-table";
+import Pageview from '@material-ui/icons/Pageview';
 import Analysis from './Analysis';
 import axios from 'axios';
  
@@ -42,14 +43,20 @@ export default function Videos (props) {
             }
 
             actions={[
-              {
-                icon: 'pageview',
-                tooltip: 'View analysis result',
-                onClick: (event, rowData) => {
-                  setView('GRAPH');
-                  setVideo( videos.filter(item => item.name === rowData.name)[0] );
+              rowData => (
+                {
+                  //disabled: (rowData.status !== 'Success'),  // the disable prop doesn't work by this way
+                  // icon: 'pageview',
+                  icon: () => (<Pageview color={ rowData.status === 'Success' ? 'inherit' : 'disabled' } />),
+                  tooltip: 'View Analysis Result',
+                  onClick: (event, rowData) => {
+                    if(rowData.status === 'Success'){
+                      setView('GRAPH');
+                      setVideo(videos.filter(item => item.name === rowData.name)[0]);
+                    } 
+                  },
                 }
-              }
+              )
             ]}
 
             options = {
