@@ -29,13 +29,11 @@ export default function MyUploader () {
     }
   }
   
-  const delay = (s) => {
-
-  return new Promise(resolve => {
-     setTimeout(() => resolve(1), s * 1000);
-  })
-
-}
+  // const delay = (s) => {
+  //   return new Promise(resolve => {
+  //     setTimeout(() => resolve(1), s * 1000);
+  //   })
+  // }
 
   // receives array of files that are done uploading when submit button is clicked
   async function handleSubmit (files) { 
