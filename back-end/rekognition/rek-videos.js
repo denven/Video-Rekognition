@@ -110,6 +110,7 @@ async function startVideoPreAnalysis (videoKey) {
     });
 
   } catch(error) {  
+    db.updateVideoAnaStatus(videoKey, -1);
     Chalk(ERROR(`Job Face Detection: Failed to get face details video ${videoKey},`, error.stack));
   }
     
@@ -143,16 +144,5 @@ async function startVideoRekognition (videoKey) {
  
 };
 
-// call this function when click 
-// addImageIntoCollection(APP_FACES_BUCKET_NAME, APP_REK_TEMP_COLLECTION_ID);
-
-//  const s3_video_key = 'sample-3.mp4';  // test video
-// const s3_video_key = 'VID_20200106_191848.mp4';  // test video
-// const s3_video_key = 'VID_20200106_191924.mp4';  // test video
-// const s3_video_key = 'sample-1.mp4';  // test video
-// const s3_video_key = 'sample-2.mp4';  // test video
-const s3_video_key = 'sample-3.mp4';  // test video
-
-// startVideoRekognition(s3_video_key);
 
 module.exports = { startVideoRekognition };
