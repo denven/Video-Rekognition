@@ -2,7 +2,7 @@
 
 A project uses AWS Rekognition to do video analysis.
 
-- Re-implemented the front-end based on [Smart Retailer](https://github.com/denven/Smart-Retailer);
+- Re-implemented the front-end based on previous implementation [Smart Retailer](https://github.com/denven/Smart-Retailer);
 - Todo: 
   1. Plan to use AntDesign to implement the front end
   2. Plan to implement a mobile version by React Native
