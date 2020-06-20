@@ -1,17 +1,16 @@
-# Video-Rekognition
+## Video-Rekognition
 
-A project uses AWS Rekognition to do video analysis. 
+A project uses AWS Rekognition to do video analysis.
 
 - Re-implemented the front-end based on [Smart Retailer](https://github.com/denven/Smart-Retailer);
 - Todo: 
   1. Plan to use AntDesign to implement the front end
   2. Plan to implement a mobile version by React Native
 
-## What's Smart-Retailer?
-
-Smart-Retailer is a web application that uses Amazon Recognition APIs to extrapolate simple business analytics from videos for the day to day operations.
-
 ## What business analytics do we get from videos?
+
+The app will extrapolate simple business analytics from videos for the day to day operations.
+
 - Number of customers in video
 - Age, sex, emotions (physical) 
 - Average time in video
@@ -31,7 +30,7 @@ Smart-Retailer is a web application that uses Amazon Recognition APIs to extrapo
 ### Note: 
 - The video analysis takes time, and the waiting time varies from duration, motions, persons, file sizes, resolutions of the video. It will awalys take several minutes to for a 20s video;
 - You should have your AWS account configured, including users/roles/credential keys, Rekognition, S3, SQS, SNS services setup etc.
-- Be aware of your bill if you stick to upload large size and compex videos to analyze. 
+- Be aware of your bill if you stick to uploading large size and complex videos for analysis. 
 
 ### Setup
  Take a look at this file for the backend, follow the format and use your own customized contents.
