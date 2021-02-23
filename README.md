@@ -2,10 +2,11 @@
 
 A project uses AWS Rekognition to do video analysis.
 
-- Re-implemented the front-end based on previous implementation [Smart Retailer](https://github.com/denven/Smart-Retailer);
-- Todo: 
-  1. Plan to use AntDesign to implement the front end
-  2. Plan to implement a mobile version by React Native
+- Re-implemented the front-end based on my previous implementation [Smart Retailer](https://github.com/denven/Smart-Retailer);
+
+### Setup
+ Take a look at this file for the backend, follow the format and use your own customized contents.
+ https://github.com/denven/Video-Rekognition/blob/master/back-end/.env.example
 
 ## What business analytics do we get from videos?
 
@@ -31,10 +32,6 @@ The app will extrapolate simple business analytics from videos for the day to da
 - The video analysis takes time, and the waiting time varies from duration, motions, persons, file sizes, resolutions of the video. It will awalys take several minutes to for a 20s video;
 - You should have your AWS account configured, including users/roles/credential keys, Rekognition, S3, SQS, SNS services setup etc.
 - Be aware of your bill if you stick to uploading large size and complex videos for analysis. 
-
-### Setup
- Take a look at this file for the backend, follow the format and use your own customized contents.
- https://github.com/denven/Video-Rekognition/blob/master/back-end/.env.example
 
 ## What's the stack
 ### Backend
