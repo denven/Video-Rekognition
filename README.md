@@ -4,8 +4,9 @@ A project uses AWS Rekognition to do video analysis.
 
 - Re-implemented the front-end based on my previous implementation [Smart Retailer](https://github.com/denven/Smart-Retailer);
 
-### Setup
+### AWS Setup
  Take a look at this file for the backend, follow the format and use your own customized contents.
+ 
  https://github.com/denven/Video-Rekognition/blob/master/back-end/.env.example
 
 ## What business analytics do we get from videos?
