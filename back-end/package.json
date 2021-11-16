@@ -10,7 +10,7 @@
     "db-init": "psql -U development -d smart_retailer < ./database/migrations/schema.sql"
   },
   "dependencies": {
-    "aws-sdk": "^2.596.0",
+    "aws-sdk": "^2.814.0",
     "body-parser": "^1.18.3",
     "chalk": "^3.0.0",
     "cors": "^2.8.5",
