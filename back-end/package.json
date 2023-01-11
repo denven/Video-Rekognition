@@ -18,7 +18,7 @@
     "express": "^4.16.4",
     "ffmpeg": "0.0.4",
     "fluent-ffmpeg": "^2.1.2",
-    "knex": "^0.20.7",
+    "knex": "^2.4.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "multer": "^1.4.2",
