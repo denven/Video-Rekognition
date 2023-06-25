@@ -9,13 +9,13 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "material-table": "^1.56.1",
-    "node-sass": "^4.13.1",
+    "node-sass": "^9.0.0",
     "normalize.css": "^8.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-dropzone-uploader": "^2.11.0",
     "react-player": "^1.14.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "5.0.1",
     "react-toastify": "^5.5.0",
     "recharts": "^2.0.0-beta.1"
   },
@@ -43,11 +43,11 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.3.8",
-    "@storybook/addon-links": "^5.3.8",
-    "@storybook/addons": "^5.3.8",
+    "@storybook/addon-actions": "^7.0.23",
+    "@storybook/addon-links": "^7.0.23",
+    "@storybook/addons": "^7.0.23",
     "@storybook/preset-create-react-app": "^1.5.2",
-    "@storybook/react": "^5.3.8"
+    "@storybook/react": "^7.0.23"
   },
   "proxy": "http://localhost:8080",
   "secure": false
